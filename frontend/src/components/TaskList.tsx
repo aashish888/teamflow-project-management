@@ -45,26 +45,37 @@ export function TaskList({ tasks }: TaskListProps) {
     });
 
     setTaskItems((currentTasks) => [createdTask, ...currentTasks]);
+    
   }
-  function handleEditTask(taskId: number) {
-    setTaskItems((currentTasks) =>
-      currentTasks.map((task) =>
-        task.id === taskId
-          ? {
-              ...task,
-              taskTitle: `${task.taskTitle} Updated`,
-              status: "IN_PROGRESS",
-            }
-          : task
-      )
-    );
+ async function handleEditTask(taskId: number) {
+  const selectedTask = taskItems.find((task) => task.id === taskId);
+
+  if (!selectedTask) {
+    return;
   }
+
+  const updatedTask = await api.updateTask(taskId, {
+    taskTitle: `${selectedTask.taskTitle} Updated`,
+    description: selectedTask.description,
+    priority: selectedTask.priority,
+    status: "IN_PROGRESS",
+    dueDate: selectedTask.dueDate,
+    assignedTeamMemberId: selectedTask.assignedTeamMemberId,
+    projectId: selectedTask.projectId,
+  });
+
+  setTaskItems((currentTasks) =>
+    currentTasks.map((task) => (task.id === taskId ? updatedTask : task))
+  );
+}
   async function handleDeleteTask(taskId: number) {
     await api.deleteTask(taskId);
     setTaskItems((currentTasks) =>
       currentTasks.filter((currentTask) => currentTask.id !== taskId)
     );
   }
+
+
 
   const filteredTasks = useMemo(() => {
     return taskItems.filter((task) => {
@@ -80,6 +91,27 @@ export function TaskList({ tasks }: TaskListProps) {
       return matchesSearch && matchesStatus && matchesPriority;
     });
   }, [taskItems, search, status, priority]);
+
+
+
+
+  if (isLoading) {
+    return (
+      <div className="rounded-2xl bg-white p-6 text-center text-sm text-slate-600 shadow-sm">
+        Loading tasks...
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="rounded-2xl border border-red-200 bg-red-50 p-6 text-center text-sm text-red-700">
+        {error}
+      </div>
+    );
+  }
+
+  
 
   return (
     <div className="overflow-hidden rounded-2xl bg-white shadow-sm">
@@ -134,7 +166,17 @@ export function TaskList({ tasks }: TaskListProps) {
               <th className="px-4 py-3 font-semibold">Actions</th>
             </tr>
           </thead>
+
+          
           <tbody>
+
+
+
+
+
+
+
+            
             {filteredTasks.map((task) => (
               <tr key={task.id} className="border-b border-slate-200 last:border-0">
                 <td className="px-4 py-4 font-medium">{task.taskTitle}</td>
@@ -164,7 +206,13 @@ export function TaskList({ tasks }: TaskListProps) {
             ))}
           </tbody>
         </table>
+
+
+
+
+        
       </div>
+
 
       {filteredTasks.length === 0 && (
         <div className="p-6 text-center text-sm text-slate-500">
