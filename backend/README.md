@@ -174,3 +174,23 @@ Postman collection section
 Postman collection is available inside the `postman` folder.
 
 
+
+
+*****************************************
+## API Documentation - Swagger
+
+Swagger UI is added using Springdoc OpenAPI.
+
+After starting the backend server, open:
+
+http://localhost:8080/swagger-ui/index.html
+
+Swagger provides interactive documentation for all REST APIs, including:
+
+- Project APIs
+- Task APIs
+- Team Member APIs
+
+It can be used to view request/response formats and test API endpoints directly from the browser.
+
+
