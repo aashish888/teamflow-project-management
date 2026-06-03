@@ -97,7 +97,7 @@ export function TaskList({ tasks }: TaskListProps) {
 
   if (isLoading) {
     return (
-      <div className="rounded-2xl bg-white p-6 text-center text-sm text-slate-600 shadow-sm">
+      <div className="rounded-2xl bg-white p-6 text-center text-sm text-slate-600 shadow-sm dark:bg-slate-900 dark:text-slate-300">
         Loading tasks...
       </div>
     );
@@ -114,24 +114,24 @@ export function TaskList({ tasks }: TaskListProps) {
   
 
   return (
-    <div className="overflow-hidden rounded-2xl bg-white shadow-sm">
-      <div className="border-b border-slate-200 p-4">
+    <div className="overflow-hidden rounded-2xl bg-white shadow-sm dark:bg-slate-900">
+      <div className="border-b border-slate-200 p-4 dark:border-slate-800">
         <TaskForm onSubmit={handleAddTask} />
       </div>
 
-      <div className="grid gap-4 border-b border-slate-200 p-4 md:grid-cols-[1fr_180px_180px]">
+      <div className="grid gap-4 border-b border-slate-200 p-4 dark:border-slate-800 md:grid-cols-[1fr_180px_180px]">
         <input
           type="search"
           value={search}
           onChange={(event) => setSearch(event.target.value)}
           placeholder="Search tasks"
-          className="rounded-lg border border-slate-300 px-4 py-3 text-sm outline-none focus:border-cyan-600 focus:ring-4 focus:ring-cyan-100"
+          className="rounded-lg border border-slate-300 px-4 py-3 text-sm outline-none focus:border-cyan-600 focus:ring-4 focus:ring-cyan-100 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
         />
 
         <select
           value={status}
           onChange={(event) => setStatus(event.target.value as "ALL" | TaskStatus)}
-          className="rounded-lg border border-slate-300 px-4 py-3 text-sm outline-none focus:border-cyan-600 focus:ring-4 focus:ring-cyan-100"
+          className="rounded-lg border border-slate-300 px-4 py-3 text-sm outline-none focus:border-cyan-600 focus:ring-4 focus:ring-cyan-100 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
         >
           <option value="ALL">All Status</option>
           <option value="TODO">TODO</option>
@@ -143,7 +143,7 @@ export function TaskList({ tasks }: TaskListProps) {
         <select
           value={priority}
           onChange={(event) => setPriority(event.target.value as "ALL" | TaskPriority)}
-          className="rounded-lg border border-slate-300 px-4 py-3 text-sm outline-none focus:border-cyan-600 focus:ring-4 focus:ring-cyan-100"
+          className="rounded-lg border border-slate-300 px-4 py-3 text-sm outline-none focus:border-cyan-600 focus:ring-4 focus:ring-cyan-100 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
         >
           <option value="ALL">All Priority</option>
           <option value="LOW">LOW</option>
@@ -178,9 +178,9 @@ export function TaskList({ tasks }: TaskListProps) {
 
             
             {filteredTasks.map((task) => (
-              <tr key={task.id} className="border-b border-slate-200 last:border-0">
+              <tr key={task.id} className="border-b border-slate-200 last:border-0 dark:border-slate-800">
                 <td className="px-4 py-4 font-medium">{task.taskTitle}</td>
-                <td className="px-4 py-4 text-slate-600">{task.description}</td>
+                <td className="px-4 py-4 text-slate-600 dark:text-slate-300">{task.description}</td>
                 <td className="px-4 py-4">{task.priority}</td>
                 <td className="px-4 py-4">{task.status}</td>
                 <td className="px-4 py-4">{task.assignedTeamMemberName}</td>
@@ -189,7 +189,7 @@ export function TaskList({ tasks }: TaskListProps) {
                   <button
                     type="button"
                     onClick={() => handleEditTask(task.id)}
-                    className="rounded-lg border border-slate-300 px-3 py-2 text-xs font-semibold text-slate-700 transition hover:bg-slate-100"
+                    className="rounded-lg border border-slate-300 px-3 py-2 text-xs font-semibold text-slate-700 transition hover:bg-slate-100 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800"
                   >
                     Edit
                   </button>
@@ -197,7 +197,7 @@ export function TaskList({ tasks }: TaskListProps) {
                   <button
                     type="button"
                     onClick={() => handleDeleteTask(task.id)}
-                    className="rounded-lg border border-red-200 px-3 py-2 text-xs font-semibold text-red-700 transition hover:bg-red-50"
+                    className="rounded-lg border border-red-200 px-3 py-2 text-xs font-semibold text-red-700 transition hover:bg-red-50 dark:border-red-900 dark:text-red-300 dark:hover:bg-red-950"
                   >
                     Delete
                   </button>
@@ -215,7 +215,7 @@ export function TaskList({ tasks }: TaskListProps) {
 
 
       {filteredTasks.length === 0 && (
-        <div className="p-6 text-center text-sm text-slate-500">
+        <div className="p-6 text-center text-sm text-slate-500 dark:text-slate-400">
           No tasks found.
         </div>
       )}

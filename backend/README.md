@@ -174,8 +174,6 @@ Postman collection section
 Postman collection is available inside the `postman` folder.
 
 
-
-
 *****************************************
 ## API Documentation - Swagger
 
@@ -192,5 +190,3 @@ Swagger provides interactive documentation for all REST APIs, including:
 - Team Member APIs
 
 It can be used to view request/response formats and test API endpoints directly from the browser.
-
-

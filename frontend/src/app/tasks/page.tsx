@@ -4,15 +4,15 @@ import { AppNav } from "@/components/AppNav";
 
 export default function TasksPage() {
   return (
-    <main className="min-h-screen bg-slate-100 text-slate-950">
+    <main className="min-h-screen bg-slate-100 text-slate-950 dark:bg-slate-950 dark:text-white">
       <AppNav />
       <section className="mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-        <div className="mb-6 rounded-2xl bg-white p-6 shadow-sm">
+        <div className="mb-6 rounded-2xl bg-white p-6 shadow-sm dark:bg-slate-900">
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-700">
             Task Management
           </p>
           <h1 className="mt-2 text-3xl font-bold">Tasks</h1>
-          <p className="mt-1 text-sm text-slate-600">
+          <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
             View, search, and filter all project tasks.
           </p>
         </div>

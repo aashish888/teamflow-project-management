@@ -25,6 +25,7 @@ TeamFlow Frontend is a responsive Project and Task Management Dashboard built us
 - Display member role and email
 - Reusable components
 - Responsive UI
+- Manual light/dark mode toggle
 - Loading and error UI states
 
 ## Folder Structure
