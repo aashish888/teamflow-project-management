@@ -2,6 +2,7 @@
 
 TeamFlow Backend is a Project and Task Management REST API built using Java, Spring Boot, and PostgreSQL.
 
+
 ## Tech Stack
 
 - Java
@@ -190,3 +191,6 @@ Swagger provides interactive documentation for all REST APIs, including:
 - Team Member APIs
 
 It can be used to view request/response formats and test API endpoints directly from the browser.
+
+
+Backend APIs are built using Spring Boot layered architecture.
