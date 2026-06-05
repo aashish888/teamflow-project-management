@@ -17,6 +17,7 @@ export function TaskList({ tasks }: TaskListProps) {
   const [priority, setPriority] = useState<"ALL" | TaskPriority>("ALL");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
+  const [editingTask, setEditingTask] = useState<Task | null>(null);
 
     useEffect(() => {
     async function loadTasks() {
@@ -42,31 +43,37 @@ export function TaskList({ tasks }: TaskListProps) {
       dueDate: values.dueDate,
       assignedTeamMemberId: 1,
       projectId: 1,
+      
     });
 
     setTaskItems((currentTasks) => [createdTask, ...currentTasks]);
+    setEditingTask(null);
     
   }
- async function handleEditTask(taskId: number) {
-  const selectedTask = taskItems.find((task) => task.id === taskId);
+ function handleStartEdit(task: Task) {
+  setEditingTask(task);
+}
 
-  if (!selectedTask) {
+async function handleUpdateTask(values: TaskFormValues) {
+  if (!editingTask) {
     return;
   }
 
-  const updatedTask = await api.updateTask(taskId, {
-    taskTitle: `${selectedTask.taskTitle} Updated`,
-    description: selectedTask.description,
-    priority: selectedTask.priority,
-    status: "IN_PROGRESS",
-    dueDate: selectedTask.dueDate,
-    assignedTeamMemberId: selectedTask.assignedTeamMemberId,
-    projectId: selectedTask.projectId,
+  const updatedTask = await api.updateTask(editingTask.id, {
+    taskTitle: values.taskTitle,
+    description: values.description,
+    priority: values.priority,
+    status: values.status,
+    dueDate: values.dueDate,
+    assignedTeamMemberId: editingTask.assignedTeamMemberId,
+    projectId: editingTask.projectId,
   });
 
   setTaskItems((currentTasks) =>
-    currentTasks.map((task) => (task.id === taskId ? updatedTask : task))
+    currentTasks.map((task) => (task.id === editingTask.id ? updatedTask : task))
   );
+
+  setEditingTask(null);
 }
   async function handleDeleteTask(taskId: number) {
     await api.deleteTask(taskId);
@@ -116,7 +123,23 @@ export function TaskList({ tasks }: TaskListProps) {
   return (
     <div className="overflow-hidden rounded-2xl bg-white shadow-sm dark:bg-slate-900">
       <div className="border-b border-slate-200 p-4 dark:border-slate-800">
-        <TaskForm onSubmit={handleAddTask} />
+        <TaskForm
+  onSubmit={editingTask ? handleUpdateTask : handleAddTask}
+  initialValues={
+    editingTask
+      ? {
+          taskTitle: editingTask.taskTitle,
+          description: editingTask.description,
+          priority: editingTask.priority,
+          status: editingTask.status,
+          assignedTeamMemberName: editingTask.assignedTeamMemberName,
+          dueDate: editingTask.dueDate,
+        }
+      : undefined
+  }
+  submitLabel={editingTask ? "Update Task" : "Add Task"}
+  onCancel={editingTask ? () => setEditingTask(null) : undefined}
+/>
       </div>
 
       <div className="grid gap-4 border-b border-slate-200 p-4 dark:border-slate-800 md:grid-cols-[1fr_180px_180px]">
@@ -188,7 +211,7 @@ export function TaskList({ tasks }: TaskListProps) {
                 <td className="flex gap-2 px-4 py-4">
                   <button
                     type="button"
-                    onClick={() => handleEditTask(task.id)}
+                 onClick={() => handleStartEdit(task)}
                     className="rounded-lg border border-slate-300 px-3 py-2 text-xs font-semibold text-slate-700 transition hover:bg-slate-100 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800"
                   >
                     Edit
