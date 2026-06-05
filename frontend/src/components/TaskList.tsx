@@ -46,8 +46,13 @@ export function TaskList({ tasks }: TaskListProps) {
       
     });
 
-    setTaskItems((currentTasks) => [createdTask, ...currentTasks]);
-    setEditingTask(null);
+    setTaskItems((currentTasks) => [
+  {
+    ...createdTask,
+    assignedTeamMemberName: values.assignedTeamMemberName,
+  },
+  ...currentTasks,
+]);
     
   }
  function handleStartEdit(task: Task) {
@@ -70,7 +75,12 @@ async function handleUpdateTask(values: TaskFormValues) {
   });
 
   setTaskItems((currentTasks) =>
-    currentTasks.map((task) => (task.id === editingTask.id ? updatedTask : task))
+    currentTasks.map((task) => (task.id === editingTask.id
+  ? {
+      ...updatedTask,
+      assignedTeamMemberName: values.assignedTeamMemberName,
+    }
+  : task))
   );
 
   setEditingTask(null);
