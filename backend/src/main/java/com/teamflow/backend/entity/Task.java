@@ -15,6 +15,9 @@ public class Task {
     @Column(nullable = false)
     private String taskTitle;
 
+    @Column(name = "assigned_user_name")
+    private String assignedUserName;
+
     private String description;
 
     @Enumerated(EnumType.STRING)
@@ -25,6 +28,8 @@ public class Task {
 
     private LocalDate dueDate;
 
+
+
     @ManyToOne
     @JoinColumn(name = "assigned_member_id")
     private TeamMember assignedTeamMember;
@@ -32,6 +37,17 @@ public class Task {
     @ManyToOne
     @JoinColumn(name = "project_id")
     private Project project;
+
+
+
+
+    public String getAssignedUserName() {
+        return assignedUserName;
+    }
+
+    public void setAssignedUserName(String assignedUserName) {
+        this.assignedUserName = assignedUserName;
+    }
 
     public Long getId() {
         return id;
@@ -95,5 +111,11 @@ public class Task {
 
     public void setProject(Project project) {
         this.project = project;
+
+
+
+
+
+
     }
 }

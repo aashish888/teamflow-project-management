@@ -13,6 +13,7 @@ public class TaskRequest {
 
     private String description;
 
+
     @NotNull(message = "Priority is required")
     private TaskPriority priority;
 
@@ -27,6 +28,18 @@ public class TaskRequest {
 
     @NotNull(message = "Project id is required")
     private Long projectId;
+
+
+    private String assignedUserName;
+
+
+    public String getAssignedUserName() {
+        return assignedUserName;
+    }
+
+    public void setAssignedUserName(String assignedUserName) {
+        this.assignedUserName = assignedUserName;
+    }
 
     public String getTaskTitle() {
         return taskTitle;

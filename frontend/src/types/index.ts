@@ -21,6 +21,7 @@ export type Task = {
   id: number;
   taskTitle: string;
   description: string;
+  assignedUserName?: string;
   priority: TaskPriority;
   status: TaskStatus;
   dueDate: string;

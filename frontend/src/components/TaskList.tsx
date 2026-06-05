@@ -38,9 +38,11 @@ export function TaskList({ tasks }: TaskListProps) {
     const createdTask = await api.createTask({
       taskTitle: values.taskTitle,
       description: values.description,
+     
       priority: values.priority,
       status: values.status,
       dueDate: values.dueDate,
+      assignedUserName: values.assignedTeamMemberName,
       assignedTeamMemberId: 1,
       projectId: 1,
       
@@ -70,6 +72,7 @@ async function handleUpdateTask(values: TaskFormValues) {
     priority: values.priority,
     status: values.status,
     dueDate: values.dueDate,
+    assignedUserName: values.assignedTeamMemberName,
     assignedTeamMemberId: editingTask.assignedTeamMemberId,
     projectId: editingTask.projectId,
   });
@@ -216,7 +219,10 @@ async function handleUpdateTask(values: TaskFormValues) {
                 <td className="px-4 py-4 text-slate-600 dark:text-slate-300">{task.description}</td>
                 <td className="px-4 py-4">{task.priority}</td>
                 <td className="px-4 py-4">{task.status}</td>
-                <td className="px-4 py-4">{task.assignedTeamMemberName}</td>
+            
+                <td className="px-4 py-4">
+  {task.assignedUserName || task.assignedTeamMemberName}
+</td>
                 <td className="px-4 py-4">{task.dueDate}</td>
                 <td className="flex gap-2 px-4 py-4">
                   <button

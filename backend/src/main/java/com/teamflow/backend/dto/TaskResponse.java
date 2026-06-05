@@ -16,13 +16,14 @@ public class TaskResponse {
     private String assignedTeamMemberName;
     private Long projectId;
     private String projectName;
-
-    public TaskResponse(Long id, String taskTitle, String description, TaskPriority priority, TaskStatus status,
+    private String assignedUserName;
+    public TaskResponse(Long id, String taskTitle, String description, String assignedUserName,TaskPriority priority, TaskStatus status,
                         LocalDate dueDate, Long assignedTeamMemberId, String assignedTeamMemberName,
                         Long projectId, String projectName) {
         this.id = id;
         this.taskTitle = taskTitle;
         this.description = description;
+        this.assignedUserName = assignedUserName;
         this.priority = priority;
         this.status = status;
         this.dueDate = dueDate;
@@ -32,6 +33,15 @@ public class TaskResponse {
         this.projectName = projectName;
     }
 
+
+
+    public String getAssignedUserName() {
+        return assignedUserName;
+    }
+
+    public void setAssignedUserName(String assignedUserName) {
+        this.assignedUserName = assignedUserName;
+    }
     public Long getId() {
         return id;
     }

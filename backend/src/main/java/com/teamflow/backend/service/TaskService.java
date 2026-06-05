@@ -1,4 +1,3 @@
-
 package com.teamflow.backend.service;
 
 import com.teamflow.backend.dto.TaskRequest;
@@ -40,6 +39,7 @@ public class TaskService {
         Task task = new Task();
         task.setTaskTitle(request.getTaskTitle());
         task.setDescription(request.getDescription());
+        task.setAssignedUserName(request.getAssignedUserName());
         task.setPriority(request.getPriority());
         task.setStatus(request.getStatus());
         task.setDueDate(request.getDueDate());
@@ -76,6 +76,7 @@ public class TaskService {
 
         task.setTaskTitle(request.getTaskTitle());
         task.setDescription(request.getDescription());
+        task.setAssignedUserName(request.getAssignedUserName());
         task.setPriority(request.getPriority());
         task.setStatus(request.getStatus());
         task.setDueDate(request.getDueDate());
@@ -98,6 +99,7 @@ public class TaskService {
                 task.getId(),
                 task.getTaskTitle(),
                 task.getDescription(),
+                task.getAssignedUserName(),
                 task.getPriority(),
                 task.getStatus(),
                 task.getDueDate(),
