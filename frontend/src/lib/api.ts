@@ -9,6 +9,7 @@ type TaskPayload = {
   priority: Task["priority"];
   status: Task["status"];
   dueDate: string;
+   assignedUserName?: string;
   assignedTeamMemberId: number;
   projectId: number;
 };
